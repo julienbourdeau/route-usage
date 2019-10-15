@@ -1,11 +1,21 @@
-# Very short description of the package
+# Route Accesses for Laravel
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/julienbourdeau/route-accesses.svg?style=flat-square)](https://packagist.org/packages/julienbourdeau/route-accesses)
 [![Build Status](https://img.shields.io/travis/julienbourdeau/route-accesses/master.svg?style=flat-square)](https://travis-ci.org/julienbourdeau/route-accesses)
 [![Quality Score](https://img.shields.io/scrutinizer/g/julienbourdeau/route-accesses.svg?style=flat-square)](https://scrutinizer-ci.com/g/julienbourdeau/route-accesses)
 [![Total Downloads](https://img.shields.io/packagist/dt/julienbourdeau/route-accesses.svg?style=flat-square)](https://packagist.org/packages/julienbourdeau/route-accesses)
 
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
+This package keeps track of all requests to know what controller method, and when it was called. The goal is not to build some sort of analytics but to find out if there are unused endpoints or controller method.
+
+After a few years, any projects have dead code and unused endpoint. Typically, you removed a link on your frontend, nothing ever links to that old `/special-page`. You want to remove it, but you're not sure.
+Have look at the Route Accesses table and figure out when this page was accessed for the last time. Last week? Better keep it for now. 3 years ago? REMOVE THE CODE! 🥳
+
+<img src="https://user-images.githubusercontent.com/1525636/66874526-afd61600-efab-11e9-9c45-3f948b31e472.png">
+
+## Important
+
+* The page will route access is **currently publicly available**. (see TODO)
+* I only logs request with a 2xx HTTP response. I don't think the rest makes sense. Your opinion is welcome!
 
 ## Installation
 
@@ -17,21 +27,23 @@ composer require julienbourdeau/route-accesses
 
 ## Usage
 
-``` php
-// Usage description here
-```
+Head over to `yourapp.tld/route-accesses`. Please note that currently this page is publicly accessible.
 
-### Testing
+## TODO
 
-``` bash
-composer test
-```
+- [ ] Add console display of the route accesses
+- [ ] Disable HTML page by default
+- [ ] Add option to put page behind middleware (like `dev` in Laravel Spark)
+- [ ] Add support for Redis to log `count` and `updated_at`
+- [ ] Find a better name? 😁
+
+## About
 
 ### Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
-## Contributing
+### Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
@@ -39,15 +51,15 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 If you discover any security related issues, please email julien@sigerr.org instead of using the issue tracker.
 
-## Credits
+### Credits
 
 - [Julien Bourdeau](https://github.com/julienbourdeau)
 - [All Contributors](../../contributors)
 
+### Laravel Package Boilerplate
+
+This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Laravel Package Boilerplate
-
-This package was generated using the [Laravel Package Boilerplate](https://laravelpackageboilerplate.com).

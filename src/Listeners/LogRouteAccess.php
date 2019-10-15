@@ -1,0 +1,38 @@
+<?php
+
+namespace Julienbourdeau\RouteAccesses\Listeners;
+
+use Illuminate\Support\Facades\DB;
+
+class LogRouteAccess
+{
+    public function handle($event)
+    {
+        $status_code = $event->response->getStatusCode();
+
+        if ($status_code > 300 || $status_code < 200) {
+            return;
+        }
+
+        $method = $event->request->getMethod();
+        $path = $event->request->route()->uri ?? $event->request->getPathInfo();
+        $action = optional($event->request->route())->getAction()['uses'];
+
+        if ($action instanceof \Closure) {
+            $action = '[Closure]';
+        } elseif (!is_string($action) && !is_null($action)) {
+            $action = '[Unsupported]';
+        }
+
+        $identifier = sha1($method.$path.$action.$status_code);
+        $date = date('Y-m-d H:i:s');
+
+        DB::statement(
+            "INSERT INTO route_accesses
+                    (`identifier`, `method`, `path`, `status_code`, `action`, `created_at`, `updated_at`)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                ON DUPLICATE KEY UPDATE `count` = `count` + 1, `updated_at` = '$date'",
+            [$identifier, $method, $path, $status_code, $action, $date, $date]
+        );
+    }
+}

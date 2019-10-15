@@ -2,7 +2,11 @@
 
 namespace Julienbourdeau\RouteAccesses;
 
+use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Julienbourdeau\RouteAccesses\Listeners\LogRouteAccess;
 
 class RouteAccessesServiceProvider extends ServiceProvider
 {
@@ -11,50 +15,10 @@ class RouteAccessesServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        /*
-         * Optional methods to load your package assets
-         */
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'route-accesses');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'route-accesses');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        Event::listen(RequestHandled::class, LogRouteAccess::class);
 
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('route-accesses.php'),
-            ], 'config');
-
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => resource_path('views/vendor/route-accesses'),
-            ], 'views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/route-accesses'),
-            ], 'assets');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/route-accesses'),
-            ], 'lang');*/
-
-            // Registering package commands.
-            // $this->commands([]);
-        }
-    }
-
-    /**
-     * Register the application services.
-     */
-    public function register()
-    {
-        // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'route-accesses');
-
-        // Register the main class to use with the facade
-        $this->app->singleton('route-accesses', function () {
-            return new RouteAccesses;
-        });
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'route-accesses');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadRoutesFrom(__DIR__.'/routes.php');
     }
 }
