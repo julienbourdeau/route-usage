@@ -1,0 +1,54 @@
+{
+    "name": "julienbourdeau/route-accesses",
+    "description": "Log what routes were used and when. Easily figure out if an hasn't been called in a long time (and delete it! 🥳)",
+    "keywords": [
+        "julienbourdeau",
+        "route-accesses"
+    ],
+    "homepage": "https://github.com/julienbourdeau/route-accesses",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Julien Bourdeau",
+            "email": "julien@sigerr.org",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "5.8.*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "3.8.*",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Julienbourdeau\\RouteAccesses\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Julienbourdeau\\RouteAccesses\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Julienbourdeau\\RouteAccesses\\RouteAccessesServiceProvider"
+            ],
+            "aliases": {
+                "RouteAccesses": "Julienbourdeau\\RouteAccesses\\RouteAccessesFacade"
+            }
+        }
+    }
+}
