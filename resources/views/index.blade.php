@@ -18,6 +18,7 @@
         <tr>
             <th>ID @include('route-usage::helpers.sorting_link', ['orderByAttribute' => 'id'])</th>
             <th>Route</th>
+            <th>Method</th>
             <th>Code @include('route-usage::helpers.sorting_link', ['orderByAttribute' => 'status_code'])</th>
             <th>Last used @include('route-usage::helpers.sorting_link', ['orderByAttribute' => 'updated_at'])</th>
         </tr>
@@ -32,6 +33,7 @@
                 <strong>{{ $route->path }}</strong><br>
                 {{ $route->action }}
             </td>
+            <td>{{ $route->method }}</td>
             <td style="text-align:center">{{ $route->status_code }}</td>
             <td>{{ $route->updated_at->diffForHumans() }}</td>
         </tr>
