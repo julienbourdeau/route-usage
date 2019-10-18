@@ -1,11 +1,11 @@
 {
-    "name": "julienbourdeau/route-accesses",
+    "name": "julienbourdeau/route-usage",
     "description": "Log what routes were used and when. Easily figure out if an hasn't been called in a long time (and delete it! 🥳)",
     "keywords": [
         "julienbourdeau",
-        "route-accesses"
+        "route-usage"
     ],
-    "homepage": "https://github.com/julienbourdeau/route-accesses",
+    "homepage": "https://github.com/julienbourdeau/route-usage",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Julienbourdeau\\RouteAccesses\\": "src"
+            "Julienbourdeau\\RouteUsage\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Julienbourdeau\\RouteAccesses\\Tests\\": "tests"
+            "Julienbourdeau\\RouteUsage\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -44,10 +44,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Julienbourdeau\\RouteAccesses\\RouteAccessesServiceProvider"
+                "Julienbourdeau\\RouteUsage\\RouteUsageServiceProvider"
             ],
             "aliases": {
-                "RouteAccesses": "Julienbourdeau\\RouteAccesses\\RouteAccessesFacade"
+                "RouteUsage": "Julienbourdeau\\RouteUsage\\RouteUsageFacade"
             }
         }
     }

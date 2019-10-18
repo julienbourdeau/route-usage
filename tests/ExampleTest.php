@@ -1,6 +1,6 @@
 <?php
 
-namespace Julienbourdeau\RouteAccesses\Tests;
+namespace Julienbourdeau\RouteUsage\Tests;
 
 use PHPUnit\Framework\TestCase;
 

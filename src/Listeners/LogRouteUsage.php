@@ -1,10 +1,10 @@
 <?php
 
-namespace Julienbourdeau\RouteAccesses\Listeners;
+namespace Julienbourdeau\RouteUsage\Listeners;
 
 use Illuminate\Support\Facades\DB;
 
-class LogRouteAccess
+class LogRouteUsage
 {
     public function handle($event)
     {
@@ -28,7 +28,7 @@ class LogRouteAccess
         $date = date('Y-m-d H:i:s');
 
         DB::statement(
-            "INSERT INTO route_accesses
+            "INSERT INTO route_usage
                     (`identifier`, `method`, `path`, `status_code`, `action`, `created_at`, `updated_at`)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
                 ON DUPLICATE KEY UPDATE `updated_at` = '$date'",

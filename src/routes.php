@@ -1,5 +1,5 @@
 <?php
 
-use Julienbourdeau\RouteAccesses\Http\Controllers\RouteAccessesController;
+use Julienbourdeau\RouteUsage\Http\Controllers\RouteUsageController;
 
-Route::get('routes-accesses', [RouteAccessesController::class, 'index'])->name('routes-accesses.index');
+Route::get('route-usage', [RouteUsageController::class, 'index'])->name('route-usage.index');

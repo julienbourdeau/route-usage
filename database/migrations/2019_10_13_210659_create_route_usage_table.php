@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRouteAccessesTable extends Migration
+class CreateRouteUsageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRouteAccessesTable extends Migration
      */
     public function up()
     {
-        Schema::create('route_accesses', function (Blueprint $table) {
+        Schema::create('route_usage', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('identifier', 40);
             $table->string('method', 12);
@@ -33,6 +33,6 @@ class CreateRouteAccessesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('route_accesses');
+        Schema::dropIfExists('route_usage');
     }
 }

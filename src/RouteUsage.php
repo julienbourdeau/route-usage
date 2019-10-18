@@ -1,11 +1,13 @@
 <?php
 
-namespace Julienbourdeau\RouteAccesses;
+namespace Julienbourdeau\RouteUsage;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RouteAccess extends Model
+class RouteUsage extends Model
 {
+    protected $table = 'route_usage';
+
     protected $casts = [
         'updated_at' => 'datetime',
     ];

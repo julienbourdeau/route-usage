@@ -11,15 +11,15 @@
 </head>
 
 <body>
-<h1>Route accesses</h1>
+<h1>Route Usage</h1>
 
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
         <tr>
-            <th>ID @include('route-accesses::helpers.sorting_link', ['orderByAttribute' => 'id'])</th>
+            <th>ID @include('route-usage::helpers.sorting_link', ['orderByAttribute' => 'id'])</th>
             <th>Route</th>
-            <th>Code @include('route-accesses::helpers.sorting_link', ['orderByAttribute' => 'status_code'])</th>
-            <th>Last used @include('route-accesses::helpers.sorting_link', ['orderByAttribute' => 'updated_at'])</th>
+            <th>Code @include('route-usage::helpers.sorting_link', ['orderByAttribute' => 'status_code'])</th>
+            <th>Last used @include('route-usage::helpers.sorting_link', ['orderByAttribute' => 'updated_at'])</th>
         </tr>
     </thead>
     <tbody>

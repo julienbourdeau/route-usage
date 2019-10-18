@@ -1,19 +1,19 @@
 <?php
 
-namespace Julienbourdeau\RouteAccesses\Http\Controllers;
+namespace Julienbourdeau\RouteUsage\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Julienbourdeau\RouteAccesses\RouteAccess;
+use Julienbourdeau\RouteUsage\RouteUsage;
 
-class RouteAccessesController extends Controller
+class RouteUsageController extends Controller
 {
     public function index(Request $request)
     {
         $order = $request->get('orderBy') ?? 'updated_at';
         $sort = $request->get('sort') ?? 'asc';
 
-        if (is_null($route = RouteAccess::first())) {
+        if (is_null($route = RouteUsage::first())) {
             return 'No route access logged yet.';
         }
 
@@ -25,8 +25,8 @@ class RouteAccessesController extends Controller
             $sort = 'asc';
         }
 
-        return view('route-accesses::index', [
-            'routes' => RouteAccess::orderBy($order, $sort)->get(),
+        return view('route-usage::index', [
+            'routes' => RouteUsage::orderBy($order, $sort)->get(),
         ]);
     }
 }
