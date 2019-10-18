@@ -20,7 +20,6 @@ class CreateRouteAccessesTable extends Migration
             $table->text('path');
             $table->unsignedSmallInteger('status_code');
             $table->text('action')->nullable();
-            $table->unsignedBigInteger('count')->default(1);
             $table->timestamps();
 
             $table->unique('identifier');
