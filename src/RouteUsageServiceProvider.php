@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\Events\RequestHandled;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Julienbourdeau\RouteUsage\Console\Commands\UsageRouteCommand;
 use Julienbourdeau\RouteUsage\Listeners\LogRouteUsage;
 
 class RouteUsageServiceProvider extends ServiceProvider
@@ -20,5 +21,12 @@ class RouteUsageServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'route-usage');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
+
+        if ($this->app->runningInConsole()) {
+             // Registering package commands.
+             $this->commands([
+                 UsageRouteCommand::class,
+             ]);
+        }
     }
 }
