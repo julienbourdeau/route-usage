@@ -10,7 +10,7 @@ class LogRouteUsage
     {
         $status_code = $event->response->getStatusCode();
 
-        if ($status_code > 300 || $status_code < 200) {
+        if ($status_code > 400 || $status_code < 200) {
             return;
         }
 
