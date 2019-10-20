@@ -3,7 +3,6 @@
 namespace Julienbourdeau\RouteUsage;
 
 use Illuminate\Foundation\Http\Events\RequestHandled;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Julienbourdeau\RouteUsage\Console\Commands\UsageRouteCommand;

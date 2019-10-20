@@ -29,7 +29,7 @@ class UsageRouteCommand extends RouteListCommand
             $usageKey = $route['method'].'.'.$route['uri'];
             $lastUsed = $routeUsage->has($usageKey) ?
                 $routeUsage->get($usageKey)->updated_at->diffForHumans()
-                : 'Never used' ;
+                : 'Never' ;
 
             return $this->option('compact') ?
                 [
