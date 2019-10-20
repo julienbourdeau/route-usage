@@ -22,10 +22,10 @@ class RouteUsageServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
-             // Registering package commands.
-             $this->commands([
-                 UsageRouteCommand::class,
-             ]);
+            // Registering package commands.
+            $this->commands([
+                UsageRouteCommand::class,
+            ]);
         }
     }
 }

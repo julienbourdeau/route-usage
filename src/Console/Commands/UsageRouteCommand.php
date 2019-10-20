@@ -19,9 +19,10 @@ class UsageRouteCommand extends RouteListCommand
     {
         $routes = $this->splitRoutesByMethods(parent::getRoutes());
 
-        # TODO: sort by updated_at and group by method+path
-        $routeUsage = RouteUsage::all()->mapWithKeys(function($r) {
+        // TODO: sort by updated_at and group by method+path
+        $routeUsage = RouteUsage::all()->mapWithKeys(function ($r) {
             $key = $r->method.'.'.$r->path;
+
             return [$key => $r];
         });
 
@@ -29,20 +30,20 @@ class UsageRouteCommand extends RouteListCommand
             $usageKey = $route['method'].'.'.$route['uri'];
             $lastUsed = $routeUsage->has($usageKey) ?
                 $routeUsage->get($usageKey)->updated_at->diffForHumans()
-                : 'Never' ;
+                : 'Never';
 
             return $this->option('compact') ?
                 [
                     'method' => $route['method'],
-                    'uri'    => $route['uri'],
+                    'uri' => $route['uri'],
                     'last used' => $lastUsed,
                     'action' => $route['action'],
                 ] : [
                     'domain' => $route['domain'],
                     'method' => $route['method'],
-                    'uri'    => $route['uri'],
+                    'uri' => $route['uri'],
                     'last used' => $lastUsed,
-                    'name'   => $route['name'],
+                    'name' => $route['name'],
                     'action' => $route['action'],
                     'middleware' => $route['middleware'],
                 ];
@@ -53,13 +54,14 @@ class UsageRouteCommand extends RouteListCommand
     {
         return collect($routes)->transform(function ($r) {
             $splitRoutes = [];
-            foreach(explode('|', $r['method']) as $m) {
+            foreach (explode('|', $r['method']) as $m) {
                 $r['method'] = $m;
                 $splitRoutes[] = $r;
             }
+
             return $splitRoutes;
         })->flatten(1)->reject(function ($r) {
-            return $r['method'] === 'HEAD';
+            return 'HEAD' === $r['method'];
         })->values();
     }
 }

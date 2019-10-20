@@ -8,17 +8,16 @@ use Julienbourdeau\RouteUsage\RouteUsage;
 use Julienbourdeau\RouteUsage\RouteUsageServiceProvider;
 use Orchestra\Testbench\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class IntegrationTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function getPackageProviders($app)
-    {
-        return [RouteUsageServiceProvider::class];
-    }
-
     /** @test */
-    public function it_can_create_route_usage_entry()
+    public function itCanCreateRouteUsageEntry()
     {
         /** @var RouteUsage $routeUsage */
         $routeUsage = RouteUsage::create([
@@ -32,9 +31,9 @@ class IntegrationTest extends TestCase
     }
 
     /** @test */
-    public function it_saves_route_usage_entry_if_response_is_valid()
+    public function itSavesRouteUsageEntryIfResponseIsValid()
     {
-        Route::get('/', function() {
+        Route::get('/', function () {
             return 'It works!';
         });
 
@@ -46,11 +45,10 @@ class IntegrationTest extends TestCase
         $response = $this->get('/not-found');
         $response->assertStatus(404);
         $this->assertEquals(1, RouteUsage::count());
-
     }
 
     /** @test */
-    public function it_updates_updatedat_attribute()
+    public function itUpdatesUpdatedatAttribute()
     {
         RouteUsage::create([
             'identifier' => ($id = sha1('GET'.'/'.'[Closure]'.'200')),
@@ -61,7 +59,7 @@ class IntegrationTest extends TestCase
             'created_at' => $created_at = $now->format('Y-m-d H:i:s'),
         ]);
 
-        Route::get('/', function() {
+        Route::get('/', function () {
             return 'It works!';
         });
 
@@ -71,5 +69,10 @@ class IntegrationTest extends TestCase
         $route = RouteUsage::where('identifier', $id)->first();
         $this->assertGreaterThan(time() - 120, $route->updated_at->getTimestamp());
         $this->assertEquals($created_at, $route->created_at);
+    }
+
+    protected function getPackageProviders($app)
+    {
+        return [RouteUsageServiceProvider::class];
     }
 }

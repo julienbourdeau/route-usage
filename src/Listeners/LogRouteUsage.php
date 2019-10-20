@@ -31,7 +31,7 @@ class LogRouteUsage
             "INSERT INTO route_usage
                     (`identifier`, `method`, `path`, `status_code`, `action`, `created_at`, `updated_at`)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
-                ON DUPLICATE KEY UPDATE `updated_at` = '$date'",
+                ON DUPLICATE KEY UPDATE `updated_at` = '{$date}'",
             [$identifier, $method, $path, $status_code, $action, $date, $date]
         );
     }
