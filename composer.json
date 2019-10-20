@@ -1,6 +1,6 @@
 {
     "name": "julienbourdeau/route-usage",
-    "description": "Log what routes were used and when. Easily figure out if an hasn't been called in a long time (and delete it! 🥳)",
+    "description": "Log what routes were used and when. Easily figure out if one hasn't been called in a long time (and delete it! 🥳)",
     "keywords": [
         "julienbourdeau",
         "route-usage"
