@@ -10,8 +10,8 @@ class RouteUsageController extends Controller
 {
     public function index(Request $request)
     {
-        $order = $request->get('orderBy') ?? 'updated_at';
-        $sort = $request->get('sort') ?? 'asc';
+        $order = $request->get('orderBy', 'updated_at');
+        $sort = $request->get('sort', 'asc');
 
         if (is_null($route = RouteUsage::first())) {
             return 'No route access logged yet.';

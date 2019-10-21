@@ -5,14 +5,12 @@ namespace Julienbourdeau\RouteUsage\Tests;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Route;
 use Julienbourdeau\RouteUsage\RouteUsage;
-use Julienbourdeau\RouteUsage\RouteUsageServiceProvider;
-use Orchestra\Testbench\TestCase;
 
 /**
  * @internal
  * @coversNothing
  */
-class IntegrationTest extends TestCase
+class IntegrationTest extends BaseIntegrationTestCase
 {
     use RefreshDatabase;
 
@@ -69,10 +67,5 @@ class IntegrationTest extends TestCase
         $route = RouteUsage::where('identifier', $id)->first();
         $this->assertGreaterThan(time() - 120, $route->updated_at->getTimestamp());
         $this->assertEquals($created_at, $route->created_at);
-    }
-
-    protected function getPackageProviders($app)
-    {
-        return [RouteUsageServiceProvider::class];
     }
 }
