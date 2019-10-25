@@ -54,7 +54,7 @@ class IntegrationTest extends BaseIntegrationTestCase
             'path' => '/',
             'status_code' => 200,
             'updated_at' => ($now = now()->subYear(1)),
-            'created_at' => $created_at = $now->format('Y-m-d H:i:s'),
+            'created_at' => ($created_at = $now),
         ]);
 
         Route::get('/', function () {
@@ -66,6 +66,6 @@ class IntegrationTest extends BaseIntegrationTestCase
 
         $route = RouteUsage::where('identifier', $id)->first();
         $this->assertGreaterThan(time() - 120, $route->updated_at->getTimestamp());
-        $this->assertEquals($created_at, $route->created_at);
+        $this->assertEquals($created_at->format('Y-m-d H:i:s'), $route->created_at->format('Y-m-d H:i:s'));
     }
 }

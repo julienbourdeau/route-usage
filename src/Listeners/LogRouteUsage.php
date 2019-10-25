@@ -3,6 +3,7 @@
 namespace Julienbourdeau\RouteUsage\Listeners;
 
 use Illuminate\Support\Facades\DB;
+use Julienbourdeau\RouteUsage\RouteUsage;
 
 class LogRouteUsage
 {
@@ -25,14 +26,16 @@ class LogRouteUsage
         }
 
         $identifier = sha1($method.$path.$action.$status_code);
-        $date = date('Y-m-d H:i:s');
+        $date = now();
 
-        DB::statement(
-            "INSERT INTO route_usage
-                    (`identifier`, `method`, `path`, `status_code`, `action`, `created_at`, `updated_at`)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-                ON DUPLICATE KEY UPDATE `updated_at` = '{$date}'",
-            [$identifier, $method, $path, $status_code, $action, $date, $date]
-        );
+        RouteUsage::updateOrCreate([
+            'identifier' => $identifier
+        ], [
+            'method' => $method,
+            'path' => $path,
+            'status_code' => $status_code,
+            'action' => $action,
+            'updated_at' => $date
+        ]);
     }
 }
