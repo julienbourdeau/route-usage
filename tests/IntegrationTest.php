@@ -68,4 +68,24 @@ class IntegrationTest extends BaseIntegrationTestCase
         $this->assertGreaterThan(time() - 120, $route->updated_at->getTimestamp());
         $this->assertEquals($created_at->format('Y-m-d H:i:s'), $route->created_at->format('Y-m-d H:i:s'));
     }
+    /** @test */
+    public function itIgnoresRoutesBasedOnConfig()
+    {
+        config(['route-usage' => [
+            'excluding-regex' => [
+                'name' => '/^nope\./',
+                'uri' => '/ignore/'
+            ]
+        ]]);
+        Route::get('/', function () { return 'home'; });
+        Route::get('/ok', function () { return 'OK'; })->name('nope.index');
+        Route::get('/ignore', function () { return 'KO'; });
+
+        $this->get('/ok');
+        $this->get('/ignore');
+        $this->assertEquals(0, RouteUsage::count());
+
+        $this->get('/');
+        $this->assertEquals(1, RouteUsage::count());
+    }
 }
