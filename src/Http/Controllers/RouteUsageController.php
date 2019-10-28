@@ -14,7 +14,7 @@ class RouteUsageController extends Controller
         $sort = $request->get('sort', 'asc');
 
         if (is_null($route = RouteUsage::first())) {
-            return 'No route access logged yet.';
+            return view('route-usage::index', ['routes' => []]);
         }
 
         $attributes = array_keys($route->getAttributes());
