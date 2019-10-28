@@ -21,6 +21,13 @@ You can install the package via composer:
 composer require julienbourdeau/route-usage
 ```
 
+Run migrations: 
+
+```bash
+php artisan migrate
+```
+
+
 ## Usage
 
 Head over to `yourapp.tld/route-usage`. Please note that this page is publicly accessible.
