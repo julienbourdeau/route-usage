@@ -36,8 +36,9 @@ class LogRouteUsage
 
         $route = $event->request->route();
         $regex = config('route-usage.excluding-regex');
+        $name = method_exists($route, 'getName') ? $route->getName() : null;
 
-        if (isset($regex['name']) && $regex['name'] && preg_match($regex['name'], $route->getName())) {
+        if (isset($regex['name']) && $regex['name'] && preg_match($regex['name'], $name)) {
             return false;
         }
 
