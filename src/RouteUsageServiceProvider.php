@@ -3,6 +3,7 @@
 namespace Julienbourdeau\RouteUsage;
 
 use Illuminate\Foundation\Http\Events\RequestHandled;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
@@ -34,6 +35,18 @@ class RouteUsageServiceProvider extends ServiceProvider
         }
 
         $this->registerRoutes();
+    }
+
+    /**
+     * Register any package services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/config.php', 'route-usage'
+        );
     }
 
     /**
