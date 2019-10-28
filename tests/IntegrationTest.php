@@ -14,6 +14,15 @@ class IntegrationTest extends BaseIntegrationTestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        Route::get('/', function () {
+            return 'It works!';
+        });
+    }
+
     /** @test */
     public function itCanCreateRouteUsageEntry()
     {
@@ -31,9 +40,6 @@ class IntegrationTest extends BaseIntegrationTestCase
     /** @test */
     public function itSavesRouteUsageEntryIfResponseIsValid()
     {
-        Route::get('/', function () {
-            return 'It works!';
-        });
 
         $response = $this->get('/');
         $response->assertStatus(200);
@@ -49,17 +55,13 @@ class IntegrationTest extends BaseIntegrationTestCase
     public function itUpdatesUpdatedatAttribute()
     {
         RouteUsage::create([
-            'identifier' => ($id = sha1('GET'.'/'.'[Closure]'.'200')),
+            'identifier' => ($id = sha1('GET' . '/' . '[Closure]' . '200')),
             'method' => 'GET',
             'path' => '/',
             'status_code' => 200,
             'updated_at' => ($now = now()->subYear(1)),
             'created_at' => $created_at = $now->format('Y-m-d H:i:s'),
         ]);
-
-        Route::get('/', function () {
-            return 'It works!';
-        });
 
         $response = $this->get('/');
         $response->assertStatus(200);
@@ -68,6 +70,16 @@ class IntegrationTest extends BaseIntegrationTestCase
         $this->assertGreaterThan(time() - 120, $route->updated_at->getTimestamp());
         $this->assertEquals($created_at, $route->created_at);
     }
+
+    /** @test */
+    public function itIgnoresOptionsHttpRequest()
+    {
+        $response = $this->call('OPTIONS', '/');
+        $response->assertStatus(200);
+
+        $this->assertEquals(0, RouteUsage::count());
+    }
+
     /** @test */
     public function itIgnoresRoutesBasedOnConfig()
     {
@@ -77,7 +89,6 @@ class IntegrationTest extends BaseIntegrationTestCase
                 'uri' => '/ignore/'
             ]
         ]]);
-        Route::get('/', function () { return 'home'; });
         Route::get('/ok', function () { return 'OK'; })->name('nope.index');
         Route::get('/ignore', function () { return 'KO'; });
 
