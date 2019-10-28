@@ -14,7 +14,7 @@ return [
     */
 
     'excluding-regex' => [
-        'name' => '/^(route-usage\.|nova\.)/',
+        'name' => '/^(route-usage|nova|debugbar|horizon)\./',
         'uri' => ''
     ],
 ];
