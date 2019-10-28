@@ -25,10 +25,13 @@ class LogRouteUsage
 
     protected function shouldLogUsage($event)
     {
-        $status_code = $event->response->getStatusCode();
+        if ($event->request->isMethod('options')) {
+            return false;
+        }
 
+        $status_code = $event->response->getStatusCode();
         if ($status_code >= 400 || $status_code < 200) {
-            return;
+            return false;
         }
 
         $route = $event->request->route();
