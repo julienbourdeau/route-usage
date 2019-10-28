@@ -3,6 +3,7 @@
 namespace Julienbourdeau\RouteUsage\Listeners;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class LogRouteUsage
 {
@@ -33,12 +34,18 @@ class LogRouteUsage
 
         $route = $event->request->route();
         $regex = config('route-usage.excluding-regex');
+        $name = method_exists($route, 'getName') ? $route->getName() : null;
 
-        if (isset($regex['name']) && $regex['name'] && preg_match($regex['name'], $route->getName())) {
+        if (isset($regex['name']) && $regex['name'] && preg_match($regex['name'], $name)) {
             return false;
         }
 
         if (isset($regex['uri']) && $regex['uri'] && preg_match($regex['uri'], $route->uri)) {
+            return false;
+        }
+
+        // Lets exclude OPTIONS in the list of methods supported
+        if (Str::is($event->request->getMethod(), 'OPTIONS')) {
             return false;
         }
 
