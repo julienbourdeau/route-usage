@@ -7,9 +7,10 @@ return [
     | Exclude requests based on route name or uri
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the database connections below you wish
-    | to use as your default connection for all database work. Of course
-    | you may use many connections at once using the Database library.
+    | Here you may specify regex to exclude routes from being logged. Typically,
+    | you want may want to exclude routes from packages or dev controllers.
+    |
+    | The value must be a valid regex or anything falsy.
     |
     */
 
@@ -17,4 +18,5 @@ return [
         'name' => '/^(route-usage|nova|debugbar|horizon)\./',
         'uri' => ''
     ],
+
 ];

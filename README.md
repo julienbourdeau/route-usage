@@ -9,9 +9,9 @@ After a few years, any projects have dead code and unused endpoint. Typically, y
 Have look at the `route_usage` table and figure out when this page was accessed for the last time. Last week? Better keep it for now. 3 years ago? REMOVE THE CODE! 🥳
 
 
-<img width="984" alt="Screenshot 2019-10-20 at 19 14 39" src="https://user-images.githubusercontent.com/1525636/67163330-e4601e00-f36d-11e9-95f9-0f5f18b158d0.png">
+<img width="984" alt="/route-usage screenshot" src="https://user-images.githubusercontent.com/10015302/67657430-b1cbac00-f991-11e9-92f9-4954d762086f.png">
 
-<img width="1486" alt="Screenshot 2019-10-20 at 19 15 19" src="https://user-images.githubusercontent.com/1525636/67163336-f9d54800-f36d-11e9-9e23-41bd7f06ca4d.png">
+<img width="1486" alt="php artisan usage:route screenshot" src="https://user-images.githubusercontent.com/1525636/67163336-f9d54800-f36d-11e9-9e23-41bd7f06ca4d.png">
 
 ## Installation
 
@@ -21,12 +21,25 @@ You can install the package via composer:
 composer require julienbourdeau/route-usage
 ```
 
-Run migrations: 
+Run migrations to create the new `route_usage` table.
 
 ```bash
 php artisan migrate
 ```
 
+Publish configuration
+
+```bash
+php artisan vendor:publish --provider="Julienbourdeau\RouteUsage\RouteUsageServiceProvider"
+```
+
+## Configuration
+
+### excluding-regex
+
+Here you may specify regex to exclude routes from being logged. 
+Typically, you want may want to exclude routes from packages or dev controllers.
+The value must be a valid regex or anything falsy.
 
 ## Usage
 
@@ -38,7 +51,6 @@ Head over to `yourapp.tld/route-usage`. Please note that this page is publicly a
 * The page showing route usage is **currently publicly available**. (see TODO)
 * I only logs request with a 2xx or 3xx HTTP response. I don't think the rest makes sense. Your opinion is welcome!
 * In the very first version, I was incrementing a `count` attribute. I removed it because I think it gives a wrong information. If it was used a lot because but last access was a year ago, it gives a false sense of importance to this unused route.
-* The HTML page with the table is volontarily not using any CSS: I want it to be very low footprint and as easy as possible to maintain.
 
 ## Todo
 
