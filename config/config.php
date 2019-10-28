@@ -1,6 +1,19 @@
 <?php
 
+use Julienbourdeau\RouteUsage\Http\Middleware\Authorize;
+
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Route Usage Path
+    |--------------------------------------------------------------------------
+    |
+    | This is the URI path where this package will be accessible from.
+    | Feel free to change this path to anything you like.
+    |
+    */
+    'path' => env('ROUTE_USAGE_PATH', 'route-usage'),
 
     /*
     |--------------------------------------------------------------------------
@@ -19,4 +32,31 @@ return [
         'uri' => ''
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Environment
+    |--------------------------------------------------------------------------
+    |
+    | If you don't want to use this package in production env
+    | at all, you can restrict that using this option
+    | rather than by using a middleware.
+    |
+    */
+
+    'allowed_environments' => ['local', 'staging', 'testing'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Route Middleware
+    |--------------------------------------------------------------------------
+    |
+    | These middleware will be assigned to this package routes, giving you
+    | the chance to add your own middleware to this list or change any of
+    | the existing middleware. Or, you can simply stick with this list.
+    |
+    */
+    'middleware' => [
+        'web',
+        Authorize::class,
+    ],
 ];
