@@ -33,6 +33,27 @@ Publish configuration
 php artisan vendor:publish --provider="Julienbourdeau\RouteUsage\RouteUsageServiceProvider"
 ```
 
+## Usage
+
+To access the route usage, you can do it in your terminal with the command.
+
+```bash
+php artisan usage:route
+```
+
+To access the HTML table, you'll first need to define who can access it. By default,
+it's available only on `local` environment.
+
+In your `AuthServiceProvide`, in the `boot` method, define who can access this page:
+
+```php
+Gate::define('viewRouteUsage', function ($user) {
+    return $user->isSuperAdmin();
+});
+```
+
+Then, head over to `yourapp.tld/route-usage`.
+
 ## Configuration
 
 ### excluding-regex
@@ -41,20 +62,13 @@ Here you may specify regex to exclude routes from being logged.
 Typically, you want may want to exclude routes from packages or dev controllers.
 The value must be a valid regex or anything falsy.
 
-## Usage
-
-Head over to `yourapp.tld/route-usage`. Please note that this page is publicly accessible.
-
-
 ## Notes
 
-* The page showing route usage is **currently publicly available**. (see TODO)
 * I only logs request with a 2xx or 3xx HTTP response. I don't think the rest makes sense. Your opinion is welcome!
 * In the very first version, I was incrementing a `count` attribute. I removed it because I think it gives a wrong information. If it was used a lot because but last access was a year ago, it gives a false sense of importance to this unused route.
 
 ## Todo
 
-- [ ] Disable HTML page by default ?
 - [ ] Add option to put page behind middleware (like `dev` in Laravel Spark)
 - [ ] Add support for Redis to log `updated_at`
 
