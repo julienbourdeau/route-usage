@@ -17,7 +17,20 @@ class UsageRouteCommand extends RouteListCommand
 
     protected function getRoutes()
     {
-        $routes = $this->splitRoutesByMethods(parent::getRoutes());
+        $regex = config('route-usage.excluding-regex') + ['name' => false, 'uri' => false];
+
+        $routes = $this->splitRoutesByMethods(parent::getRoutes())
+            ->filter(function ($route) use ($regex) {
+                if (
+                    'OPTIONS' == $route['method'] ||
+                    $regex['name'] && preg_match($regex['name'], $route['name']) ||
+                    $regex['uri'] && preg_match($regex['uri'], $route['uri'])
+                ) {
+                    return false;
+                }
+
+                return true;
+        });
 
         // TODO: sort by updated_at and group by method+path
         $routeUsage = RouteUsage::all()->mapWithKeys(function ($r) {
