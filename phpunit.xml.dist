@@ -20,6 +20,7 @@
         </whitelist>
     </filter>
     <php>
+        <env name="APP_KEY" value="base64:Vofr/3qQZXGlILQy/wZbsPb0ErpwsfnWoGHbgmlJVJw="/>
         <env name="DB_CONNECTION" value="mysql"/>
         <env name="DB_DATABASE" value="test_route_usage"/>
         <env name="DB_USERNAME" value="root"/>

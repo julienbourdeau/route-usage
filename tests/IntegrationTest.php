@@ -3,6 +3,7 @@
 namespace Julienbourdeau\RouteUsage\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Julienbourdeau\RouteUsage\RouteUsage;
 
@@ -98,5 +99,21 @@ class IntegrationTest extends BaseIntegrationTestCase
 
         $this->get('/');
         $this->assertEquals(1, RouteUsage::count());
+    }
+
+    /** @test */
+    public function itOnlyShowsHtmlPageOnLocalByDefault()
+    {
+
+        $response = $this->get(route('route-usage.index'));
+        $response->assertStatus(403);
+
+        App::shouldReceive('environment')
+            ->once()
+            ->with('local')
+            ->andReturnTrue();
+
+        $response = $this->get(route('route-usage.index'));
+        $response->assertStatus(200);
     }
 }
