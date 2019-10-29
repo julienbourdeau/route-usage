@@ -2,6 +2,19 @@
 
 All notable changes to `route-usage` will be documented in this file
 
+## 0.3
+**29 Oct 2019** | [git diff 0.2..0.3](https://github.com/julienbourdeau/route-usage/compare/0.3..0.3)
+
+* Hide HTML page behind Gate  - PR [#13](https://github.com/julienbourdeau/route-usage/pull/13)
+
+    In your `AuthServicePrivder::boot`, define a gate:
+    
+    ```php
+    Gate::define('viewRouteUsage', function ($user) {
+        return $user->isSuperAdmin();
+    });
+    ```
+
 ## 0.2
 **28 Oct 2019** | [git diff 0.1..0.2](https://github.com/julienbourdeau/route-usage/compare/0.1..0.2)
 
