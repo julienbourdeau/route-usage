@@ -4,6 +4,7 @@ namespace Julienbourdeau\RouteUsage\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Julienbourdeau\RouteUsage\RouteUsage;
 
 /**
@@ -18,6 +19,10 @@ class RouteUsageControllerTest extends BaseIntegrationTestCase
     {
         parent::setUp();
         $this->loadFixtures();
+
+        Gate::shouldReceive('check')
+            ->with('viewRouteUsage', \Mockery::any())
+            ->andReturnTrue();
     }
 
     /** @test */

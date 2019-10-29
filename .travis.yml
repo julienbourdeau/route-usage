@@ -6,11 +6,6 @@ php:
 services:
     - mysql
 
-env:
-  matrix:
-    - COMPOSER_FLAGS="--prefer-lowest"
-    - COMPOSER_FLAGS=""
-
 before_install:
   - mysql -e 'CREATE DATABASE test_route_usage;'
 
