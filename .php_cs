@@ -9,6 +9,7 @@ $config = PhpCsFixer\Config::create()
         '@PSR2' => true,
         '@PhpCsFixer' => true,
         'list_syntax' => ['syntax' => 'long'],
+        'multiline_whitespace_before_semicolons' => false,
     ])
     ->setFinder($finder)
 ;

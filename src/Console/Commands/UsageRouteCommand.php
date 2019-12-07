@@ -30,7 +30,7 @@ class UsageRouteCommand extends RouteListCommand
                 }
 
                 return true;
-        });
+            });
 
         // TODO: sort by updated_at and group by method+path
         $routeUsage = RouteUsage::all()->mapWithKeys(function ($r) {

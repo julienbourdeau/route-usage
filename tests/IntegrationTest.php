@@ -41,7 +41,6 @@ class IntegrationTest extends BaseIntegrationTestCase
     /** @test */
     public function itSavesRouteUsageEntryIfResponseIsValid()
     {
-
         $response = $this->get('/');
         $response->assertStatus(200);
         $this->assertEquals(1, RouteUsage::count());
@@ -56,7 +55,7 @@ class IntegrationTest extends BaseIntegrationTestCase
     public function itUpdatesUpdatedatAttribute()
     {
         RouteUsage::create([
-            'identifier' => ($id = sha1('GET' . '/' . '[Closure]' . '200')),
+            'identifier' => ($id = sha1('GET'.'/'.'[Closure]'.'200')),
             'method' => 'GET',
             'path' => '/',
             'status_code' => 200,
@@ -87,8 +86,8 @@ class IntegrationTest extends BaseIntegrationTestCase
         config(['route-usage' => [
             'excluding-regex' => [
                 'name' => '/^nope\./',
-                'uri' => '/ignore/'
-            ]
+                'uri' => '/ignore/',
+            ],
         ]]);
         Route::get('/ok', function () { return 'OK'; })->name('nope.index');
         Route::get('/ignore', function () { return 'KO'; });
@@ -104,7 +103,6 @@ class IntegrationTest extends BaseIntegrationTestCase
     /** @test */
     public function itOnlyShowsHtmlPageOnLocalByDefault()
     {
-
         $response = $this->get(route('route-usage.index'));
         $response->assertStatus(403);
 

@@ -2,7 +2,6 @@
 
 namespace Julienbourdeau\RouteUsage\Listeners;
 
-use Illuminate\Support\Facades\DB;
 use Julienbourdeau\RouteUsage\RouteUsage;
 
 class LogRouteUsage
@@ -16,13 +15,13 @@ class LogRouteUsage
         extract($this->extractAttributes($event));
 
         RouteUsage::updateOrCreate([
-            'identifier' => $identifier
+            'identifier' => $identifier,
         ], [
             'method' => $method,
             'path' => $path,
             'status_code' => $status_code,
             'action' => $action,
-            'updated_at' => $date
+            'updated_at' => $date,
         ]);
     }
 
@@ -61,6 +60,7 @@ class LogRouteUsage
         } elseif (!is_string($action) && !is_null($action)) {
             $action = '[Unsupported]';
         }
+
         return [
             'status_code' => $status_code = $event->response->getStatusCode(),
             'method' => $method = $event->request->getMethod(),

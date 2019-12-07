@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Exclude requests based on route name or uri
@@ -16,7 +15,6 @@ return [
 
     'excluding-regex' => [
         'name' => '/^(route-usage|nova|debugbar|horizon)\./',
-        'uri' => ''
+        'uri' => '',
     ],
-
 ];
