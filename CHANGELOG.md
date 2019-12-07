@@ -2,8 +2,17 @@
 
 All notable changes to `route-usage` will be documented in this file
 
+## 0.4
+**07 Dec 2019** | [git diff 0.3..0.4](https://github.com/julienbourdeau/route-usage/compare/0.3..0.4)
+
+* Support other databases - PR [#5](https://github.com/julienbourdeau/route-usage/pull/5)
+
+    Instead of a raw MySQL query, the package is now using Eloquent 
+    to save the route usage entries. This brings support to other databases, 
+    so tests are now running using SQLite.
+
 ## 0.3
-**29 Oct 2019** | [git diff 0.2..0.3](https://github.com/julienbourdeau/route-usage/compare/0.3..0.3)
+**29 Oct 2019** | [git diff 0.2..0.3](https://github.com/julienbourdeau/route-usage/compare/0.2..0.3)
 
 * Hide HTML page behind Gate  - PR [#13](https://github.com/julienbourdeau/route-usage/pull/13)
 

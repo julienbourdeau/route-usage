@@ -67,11 +67,22 @@ The value must be a valid regex or anything falsy.
 * I only logs request with a 2xx or 3xx HTTP response. I don't think the rest makes sense. Your opinion is welcome!
 * In the very first version, I was incrementing a `count` attribute. I removed it because I think it gives a wrong information. If it was used a lot because but last access was a year ago, it gives a false sense of importance to this unused route.
 
-## Todo
+## Road to 1.0 release
 
-- [ ] Add option to put page behind middleware (like `dev` in Laravel Spark)
-- [ ] Add support for Redis to log `updated_at`
+**Less SQL queries**
 
+I'll like to reduce the number of SQL queries performed. Typically, if a route 
+is called, we don't need to log usage for the next 5 minutes. I'm thinking we could 
+use some cache or split the data: attributes in mysql but last used date in Redis.
+
+💡 Feel free to open an issue to discuss your ideas.
+
+**More package to ignore**
+
+Today, we ignore routes from Nova or Debugbar because there is nothing you can
+do about these routes. I'd like to support more packages out of the box.
+
+📦 What package would you like to see added?
 
 ## About
 
