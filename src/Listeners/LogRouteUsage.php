@@ -3,6 +3,7 @@
 namespace Julienbourdeau\RouteUsage\Listeners;
 
 use Illuminate\Support\Facades\DB;
+use Julienbourdeau\RouteUsage\RouteUsage;
 
 class LogRouteUsage
 {
@@ -14,13 +15,15 @@ class LogRouteUsage
 
         extract($this->extractAttributes($event));
 
-        DB::statement(
-            "INSERT INTO route_usage
-                    (`identifier`, `method`, `path`, `status_code`, `action`, `created_at`, `updated_at`)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-                ON DUPLICATE KEY UPDATE `updated_at` = '{$date}'",
-            [$identifier, $method, $path, $status_code, $action, $date, $date]
-        );
+        RouteUsage::updateOrCreate([
+            'identifier' => $identifier
+        ], [
+            'method' => $method,
+            'path' => $path,
+            'status_code' => $status_code,
+            'action' => $action,
+            'updated_at' => $date
+        ]);
     }
 
     protected function shouldLogUsage($event)
@@ -58,7 +61,6 @@ class LogRouteUsage
         } elseif (!is_string($action) && !is_null($action)) {
             $action = '[Unsupported]';
         }
-
         return [
             'status_code' => $status_code = $event->response->getStatusCode(),
             'method' => $method = $event->request->getMethod(),

@@ -11,6 +11,7 @@ class RouteUsage extends Model
     protected static $unguarded = true;
 
     protected $casts = [
+        'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 }
