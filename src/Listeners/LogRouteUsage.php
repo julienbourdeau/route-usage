@@ -67,7 +67,7 @@ class LogRouteUsage
             'path' => $path,
             'action' => $action,
             'identifier' => sha1($method.$path.$action.$status_code),
-            'date' => date('Y-m-d H:i:s'),
+            'date' => date(config('route-usage.date-format')),
         ];
     }
 }
