@@ -60,7 +60,7 @@ class LogRouteUsage
         } elseif (!is_string($action) && !is_null($action)) {
             $action = '[Unsupported]';
         }
-        
+
         $date_format = config('route-usage.date-format') ?? 'Y-m-d H:i:s';
 
         return [
