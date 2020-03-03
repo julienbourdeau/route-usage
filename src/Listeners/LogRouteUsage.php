@@ -60,6 +60,8 @@ class LogRouteUsage
         } elseif (!is_string($action) && !is_null($action)) {
             $action = '[Unsupported]';
         }
+        
+        $date_format = config('route-usage.date-format') ?? 'Y-m-d H:i:s';
 
         return [
             'status_code' => $status_code = $event->response->getStatusCode(),
@@ -67,7 +69,7 @@ class LogRouteUsage
             'path' => $path,
             'action' => $action,
             'identifier' => sha1($method.$path.$action.$status_code),
-            'date' => date(config('route-usage.date-format')),
+            'date' => date($date_format),
         ];
     }
 }
