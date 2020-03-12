@@ -14,4 +14,9 @@ class RouteUsage extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    public function getDateFormat()	
+    {	
+        return config('route-usage.date-format', 'Y-m-d H:i:s');	
+    }
 }
