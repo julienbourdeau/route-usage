@@ -114,4 +114,18 @@ class IntegrationTest extends BaseIntegrationTestCase
         $response = $this->get(route('route-usage.index'));
         $response->assertStatus(200);
     }
+
+    /** @test */
+    public function itHandlesMultipleTimeFormats()
+    {
+		config(['route-usage' => [
+            'excluding-regex' => [],
+			'date-format' => 'Y-m-d H:i:s.u',
+        ]]);
+		
+		$response = $this->get('/');
+        $response->assertStatus(200);
+
+		$this->assertEquals(1, RouteUsage::count());
+    }
 }
