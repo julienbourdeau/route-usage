@@ -120,7 +120,7 @@ class IntegrationTest extends BaseIntegrationTestCase
     {
 		config(['route-usage' => [
             'excluding-regex' => [],
-			'date-format' => 'Y-m-d H:i:s.u',
+            'date-format' => 'Y-m-d H:i:s.u',
         ]]);
 		
 		$response = $this->get('/');
