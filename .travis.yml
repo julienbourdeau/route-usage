@@ -3,7 +3,7 @@ language: php
 php:
   - 7.3
   - 7.4
-  nightly
+  - nightly
 
 services:
   - mysql
