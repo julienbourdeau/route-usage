@@ -36,7 +36,7 @@ class RouteUsageControllerTest extends BaseIntegrationTestCase
         DB::table('route_usage')->truncate();
         $response = $this->get(route('route-usage.index'));
         $response->assertStatus(200);
-        $this->assertContains('No routes found.', $response->content());
+        $this->assertStringContainsString('No routes found.', $response->content());
     }
 
     /** @test */
