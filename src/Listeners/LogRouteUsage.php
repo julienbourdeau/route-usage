@@ -39,6 +39,12 @@ class LogRouteUsage
         $route = $event->request->route();
         $regex = config('route-usage.excluding-regex');
 
+        // $route is not set when using Dingo router
+        // See https://github.com/julienbourdeau/route-usage/issues/22
+        if (is_null($route)) {
+            return true;
+        }
+
         if (isset($regex['name']) && $regex['name'] && preg_match($regex['name'], $route->getName())) {
             return false;
         }
