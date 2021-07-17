@@ -17,4 +17,18 @@ return [
         'name' => '/^(route-usage|nova|debugbar|horizon|telescope|telescope-api|__clockwork)\./',
         'uri' => '',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Specify date format
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify the time format used to save the route usage
+    | on the database.
+    |
+    | The value must be a valid time format.
+    |
+    */
+
+    'date-format' => 'Y-m-d H:i:s',
 ];
