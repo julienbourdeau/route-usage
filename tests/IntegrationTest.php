@@ -59,7 +59,7 @@ class IntegrationTest extends BaseIntegrationTestCase
             'method' => 'GET',
             'path' => '/',
             'status_code' => 200,
-            'updated_at' => ($now = now()->subYear(1)),
+            'updated_at' => ($now = now()->subYear()),
             'created_at' => ($created_at = $now),
         ]);
 
